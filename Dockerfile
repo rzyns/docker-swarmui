@@ -20,18 +20,7 @@ RUN apt-get update \
         git \
         libatomic1 \
         wget \
-    && rm -rf /var/lib/apt/lists/*
-
-# Install .NET SDK
-RUN curl -fSL --output dotnet.tar.gz https://builds.dotnet.microsoft.com/dotnet/Sdk/$DOTNET_SDK_VERSION/dotnet-sdk-$DOTNET_SDK_VERSION-linux-x64.tar.gz \
-    && dotnet_sha512='2499faa1520e8fd9a287a6798755de1a3ffef31c0dc3416213c8a9bec64861419bfc818f1c1c410b86bb72848ce56d4b6c74839afd8175a922345fc649063ec6' \
-    && echo "$dotnet_sha512  dotnet.tar.gz" | sha512sum -c - \
-    && mkdir -p /usr/share/dotnet \
-    && tar -oxzf dotnet.tar.gz -C /usr/share/dotnet ./packs ./sdk ./sdk-manifests ./templates ./LICENSE.txt ./ThirdPartyNotices.txt \
-    && rm dotnet.tar.gz \
-    && ln -s /usr/share/dotnet/dotnet /usr/bin/ \
-    # Trigger first run experience by running arbitrary cmd
-    && dotnet help
+        dotnet-sdk-8.0
 
 # Install PowerShell global tool
 RUN powershell_version=7.4.6 \
@@ -47,12 +36,11 @@ RUN powershell_version=7.4.6 \
     # To reduce image size, remove the copy nupkg that nuget keeps.
     && find /usr/share/powershell -print | grep -i '.*[.]nupkg$' | xargs rm
 
-# Install python
-RUN apt update
-RUN apt install -y git wget build-essential python3.11 python3.11-venv python3.11-dev ffmpeg
+RUN    apt-get install -y git wget build-essential python3.11 python3.11-venv python3.11-dev ffmpeg \
+    && apt-get install -y libglib2.0-0 libgl1 \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install dependencies for controlnet preprocessors
-RUN apt install -y libglib2.0-0 libgl1
 
 # Copy swarm's files into the docker container
 RUN git clone https://github.com/mcmonkeyprojects/SwarmUI.git /SwarmUI
@@ -60,11 +48,11 @@ RUN git clone https://github.com/mcmonkeyprojects/SwarmUI.git /SwarmUI
 WORKDIR /SwarmUI
 
 # Stupidproofing on git calls from inside docker
-RUN git config --global --add safe.directory '*'
+RUN    git config --global --add safe.directory '*'
 
 # Expose the port for other containers (to use Swarm as an API if you want)
 EXPOSE 7801
 EXPOSE 7821
 
 # Set the run file to the launch script
-ENTRYPOINT ["bash", "/SwarmUI/launchtools/docker-standard-inner.sh"]
+ENTRYPOINT ["bash", "-c", "./launch-linux.sh --launch_mode none --host 0.0.0.0"]
