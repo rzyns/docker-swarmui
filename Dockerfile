@@ -37,7 +37,7 @@ RUN powershell_version=7.4.6 \
     && find /usr/share/powershell -print | grep -i '.*[.]nupkg$' | xargs rm
 
 RUN    apt-get install -y git wget build-essential python3.11 python3.11-venv python3.11-dev ffmpeg \
-    && apt-get install -y libglib2.0-0 libgl1 \
+                          libglib2.0-0 libgl1 aria2c \
     && rm -rf /var/lib/apt/lists/*
 
 # Install dependencies for controlnet preprocessors
@@ -57,6 +57,7 @@ RUN    git config --global --add safe.directory '*' \
 
 # Expose the port for other containers (to use Swarm as an API if you want
 EXPOSE 7801
+EXPOSE 6800
 
 COPY ./start.sh /SwarmUI/start.sh
 

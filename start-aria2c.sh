@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+aria2c \
+    --enable-rpc=true \
+    --rpc-listen-all=true \
+    --rpc-allow-origin-all=true \
+    --save-session-interval=5 \
+    --input-file=/workspace/aria-session.txt \
+    --save-session=/workspace/aria-session.txt \
+    --rpc-secret "${ARIA2C_SECRET}"
