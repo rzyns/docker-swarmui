@@ -37,7 +37,7 @@ RUN powershell_version=7.4.6 \
     && find /usr/share/powershell -print | grep -i '.*[.]nupkg$' | xargs rm
 
 RUN    apt-get install -y git wget build-essential python3.11 python3.11-venv python3.11-dev ffmpeg \
-                          libglib2.0-0 libgl1 aria2c \
+                          libglib2.0-0 libgl1 \
     && rm -rf /var/lib/apt/lists/*
 
 # Install dependencies for controlnet preprocessors
