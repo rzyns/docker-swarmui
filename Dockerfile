@@ -48,11 +48,14 @@ RUN git clone https://github.com/mcmonkeyprojects/SwarmUI.git /SwarmUI
 WORKDIR /SwarmUI
 
 # Stupidproofing on git calls from inside docker
-RUN    git config --global --add safe.directory '*'
+RUN    git config --global --add safe.directory '*' \
+    && [ -e Models ] && mv Models _Models || true \
+    && [ -e Data ] && mv Data _Data || true \
+    && ln -s /workspace/Models Models \
+    && ln -s /workspace/Data Data
 
-# Expose the port for other containers (to use Swarm as an API if you want)
+# Expose the port for other containers (to use Swarm as an API if you want
 EXPOSE 7801
-EXPOSE 7821
 
 # Set the run file to the launch script
 ENTRYPOINT ["bash", "-c", "./launch-linux.sh --launch_mode none --host 0.0.0.0"]
