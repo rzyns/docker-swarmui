@@ -5,7 +5,7 @@
         settings:
                 #The location of the 'main.py' file. Can be an absolute or relative path, but must end with 'main.py'.
                 #If you used the installer, this should be 'dlbackend/comfy/ComfyUI/main.py'.
-                StartScript: /workspace/dlbackend/ComfyUI/main.py
+                StartScript: /SwarmUI/dlbackend/ComfyUI/main.py
                 #Any arguments to include in the launch script.
                 ExtraArgs: \x
                 #If unchecked, the system will automatically add some relevant arguments to the comfy launch. If checked, automatic args (other than port) won't be added.
