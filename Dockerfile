@@ -1,5 +1,11 @@
-FROM ghcr.io/ai-dock/base-image:v2-cuda-12.4.1-cudnn-devel-22.04
+ARG IMAGE_BASE="ghcr.io/ai-dock/base-image:v2-cuda-12.4.1-cudnn-devel-22.04"
+FROM ${IMAGE_BASE}
 
+LABEL org.opencontainers.image.source=https://github.com/rzyns/docker-swarmui
+LABEL org.opencontainers.image.description="SwarmUI Stable Diffusion backend and GUI"
+LABEL maintainer="Janusz Dziurzyński <janusz@forserial.org>"
+
+# Dotnet env stuff
 ENV \
     # Do not generate certificate
     DOTNET_GENERATE_ASPNET_CERTIFICATE=false \
@@ -14,13 +20,17 @@ ENV \
     # PowerShell telemetry for docker image usage
     POWERSHELL_DISTRIBUTION_CHANNEL=PSDocker-DotnetSDK-Ubuntu-24.04
 
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         curl \
         git \
         libatomic1 \
         wget \
-        dotnet-sdk-8.0
+        dotnet-sdk-8.0 \
+        build-essential python3.11 python3.11-venv python3.11-dev ffmpeg libglib2.0-0 libgl1 aria2 \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install PowerShell global tool
 RUN powershell_version=7.4.6 \
@@ -36,24 +46,19 @@ RUN powershell_version=7.4.6 \
     # To reduce image size, remove the copy nupkg that nuget keeps.
     && find /usr/share/powershell -print | grep -i '.*[.]nupkg$' | xargs rm
 
-RUN    apt-get install -y git wget build-essential python3.11 python3.11-venv python3.11-dev ffmpeg \
-                          libglib2.0-0 libgl1 \
-    && rm -rf /var/lib/apt/lists/*
-
-# Install dependencies for controlnet preprocessors
-
-# Copy swarm's files into the docker container
 RUN git clone https://github.com/mcmonkeyprojects/SwarmUI.git /SwarmUI
 
 WORKDIR /SwarmUI
 
-# Stupidproofing on git calls from inside docker
 RUN    git config --global --add safe.directory '*' \
     && [ -d Models ] && mv Models _Models || true \
     && [ -d Data ] && mv Data _Data || true \
-    && [ -d .git/info ] && echo '/start.sh' >> .git/info/exclude \
-    && ln -s /workspace/Models Models \
-    && ln -s /workspace/Data Data
+    && [ -d .git/info ] && echo '/start.sh' >> .git/info/exclude
+
+RUN chmod a+x ./launchtools/comfy-install-linux.sh && ./launchtools/comfy-install-linux.sh nv
+
+    # && ln -s /workspace/Models Models \
+    # && ln -s /workspace/Data Data
 
 # Expose the port for other containers (to use Swarm as an API if you want
 EXPOSE 7801
