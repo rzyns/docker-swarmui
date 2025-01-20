@@ -60,6 +60,7 @@ EXPOSE 7801
 EXPOSE 6800
 
 COPY ./start.sh /SwarmUI/start.sh
+COPY ./Settings.fds ./Backends.fds ./start-aria2c.sh /SwarmUI/
 
 # Set the run file to the launch script
 ENTRYPOINT ["bash", "./start.sh"]
