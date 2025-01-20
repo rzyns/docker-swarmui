@@ -6,15 +6,6 @@ LABEL org.opencontainers.image.source=https://github.com/rzyns/docker-swarmui
 LABEL org.opencontainers.image.description="SwarmUI Stable Diffusion backend and GUI"
 LABEL maintainer="Janusz Dziurzyński <janusz@forserial.org>"
 
-# Dotnet env stuff
-ENV \
-    DOTNET_GENERATE_ASPNET_CERTIFICATE=false \
-    DOTNET_NOLOGO=true \
-    DOTNET_SDK_VERSION=8.0.405 \
-    DOTNET_USE_POLLING_FILE_WATCHER=true \
-    NUGET_XMLDOC_MODE=skip \
-    POWERSHELL_DISTRIBUTION_CHANNEL=PSDocker-DotnetSDK-Ubuntu-24.04
-
 RUN <<EOF
     apt-get update
     apt-get install -y --no-install-recommends \
@@ -33,23 +24,6 @@ RUN <<EOF
         wget
 
     rm -rf /var/lib/apt/lists/*
-EOF
-
-# Install PowerShell global tool
-RUN <<EOF
-    powershell_version=7.4.6
-    curl -fSL --output PowerShell.Linux.x64.$powershell_version.nupkg https://powershellinfraartifacts-gkhedzdeaghdezhr.z01.azurefd.net/tool/$powershell_version/PowerShell.Linux.x64.$powershell_version.nupkg
-    powershell_sha512='676a69c7a0b03c6a2397a253ce54cb76857d4ddd252f9da7d9fc3d1cb7a62386316b73bd87519061f799fee60cbc39831060b263ebe0f200879c1524e8aea00d'
-    echo "$powershell_sha512  PowerShell.Linux.x64.$powershell_version.nupkg" | sha512sum -c -
-    mkdir -p /usr/share/powershell
-    dotnet tool install --add-source / --tool-path /usr/share/powershell --version $powershell_version PowerShell.Linux.x64
-    dotnet nuget locals all --clear
-    rm PowerShell.Linux.x64.$powershell_version.nupkg
-    ln -s /usr/share/powershell/pwsh /usr/bin/pwsh
-    chmod 755 /usr/share/powershell/pwsh
-
-    # To reduce image size, remove the copy nupkg that nuget keeps.
-    find /usr/share/powershell -print | grep -i '.*[.]nupkg$' | xargs rm
 EOF
 
 RUN --mount=type=cache,target=/tmp/git_cache <<EOF
