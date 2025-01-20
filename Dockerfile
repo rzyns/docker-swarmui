@@ -61,7 +61,7 @@ EXPOSE 6800
 
 COPY ./start.sh /SwarmUI/start.sh
 COPY ./Settings.fds ./Backends.fds ./start-aria2c.sh /SwarmUI/
-COPY ./comfyui-install-linux.sh ./launchtools/comfyui-install-linux.sh 
+COPY ./comfy-install-linux.sh /SwarmUI/launchtools/
 
 # Set the run file to the launch script
 ENTRYPOINT ["bash", "./start.sh"]
