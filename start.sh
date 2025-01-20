@@ -7,12 +7,11 @@ if [ -d "/workspace" ] && [ ! -d "/workspace/dlbackend" ]; then
     bash -eo pipefail /SwarmUI/launchtools/comfy-install-linux.sh nv
     mv dlbackend/ComfyUI/models dlbackend/ComfyUI/_models
     mkdir dlbackend/ComfyUI/models
-    mv dlbackend/ComfyUI/_models/config dlbackend/ComfyUI/
 
-    MODEL_DIRS="checkpoints clip clip_vision config controlnet diffusers diffusion_models embeddings gligen hypernetworks loras photomaker style_models text_encoders unet upscale_models vae vae_approx"
+    MODEL_DIRS="checkpoints clip clip_vision configs controlnet diffusers diffusion_models embeddings gligen hypernetworks loras photomaker style_models text_encoders unet upscale_models vae vae_approx"
 
-    if [ ! -d "/workspace/Models/config" ]; then
-        mv dlbackend/ComfyUI/_models/config /workspace/Models/
+    if [ ! -d "/workspace/Models/configs" ]; then
+        mv dlbackend/ComfyUI/_models/configs /workspace/Models/
         mkdir /workspace/Models
     fi
 
