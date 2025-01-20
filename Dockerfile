@@ -6,13 +6,11 @@ LABEL org.opencontainers.image.source=https://github.com/rzyns/docker-swarmui
 LABEL org.opencontainers.image.description="SwarmUI Stable Diffusion backend and GUI"
 LABEL maintainer="Janusz Dziurzyński <janusz@forserial.org>"
 
-RUN <<EOF
-    apt-get update
-    apt-get install -y --no-install-recommends \
+RUN    apt-get update \
+    && apt-get install -y --no-install-recommends \
         aria2 \
         build-essential \
         curl \
-        dotnet-sdk-8.0 \
         ffmpeg \
         git \
         libatomic1 \
@@ -21,10 +19,9 @@ RUN <<EOF
         python3.11 \
         python3.11-dev \
         python3.11-venv \
-        wget
-
-    rm -rf /var/lib/apt/lists/*
-EOF
+        python3-pip \
+        wget \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN --mount=type=cache,target=/tmp/git_cache <<EOF
     git clone --depth=1 https://github.com/mcmonkeyprojects/SwarmUI.git /tmp/git_cache/SwarmUI
@@ -53,8 +50,13 @@ EOF
 
 WORKDIR /SwarmUI/dlbackend/ComfyUI
 
-RUN --mount=type=cache,target=/root/.cache/pip python3.11 -s -m pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu124
-RUN --mount=type=cache,target=/root/.cache/pip python3.11 -s -m pip install -r requirements.txt
+RUN --mount=type=cache,target=/root/.pip/cache <<EOF
+    python3 -s -m venv venv
+    source venv/bin/activate
+    python -s -m pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu124
+    python -s -m pip install -r requirements.txt
+    python -s -m pip install rembg onnxruntime matplotlib opencv-python-headless imageio-ffmpeg dill ultralytics==8.1.47
+EOF
 
 WORKDIR /SwarmUI
 
@@ -72,7 +74,6 @@ EOF
 
 COPY ./start.sh /SwarmUI/start.sh
 COPY ./Settings.fds ./Backends.fds ./start-aria2c.sh /SwarmUI/
-COPY ./comfy-install-linux.sh /SwarmUI/launchtools/
 
 # Expose the port for other containers (to use Swarm as an API if you want
 EXPOSE 7801
