@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
-if [ ! -d "./dlbackend/comfy/ComfyUI" ]; then
+set -eo pipefail
+
+if [ ! -d "./dlbackend" ]; then
     ./launchtools/comfy-install-linux.sh nv
 fi
 
-exec ./launch-linux.sh --launch_mode none --host 0.0.0.0
+exec ./launch-linux.sh --launch_mode web --host 0.0.0.0
