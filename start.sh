@@ -29,4 +29,4 @@ if [ -d "/workspace/Data" ]; then
     cp Backends.fds /workspace/Data
 fi
 
-exec ./launch-linux.sh --launch_mode web --host 0.0.0.0
+exec ./launch-linux.sh --launch_mode none --host 0.0.0.0
