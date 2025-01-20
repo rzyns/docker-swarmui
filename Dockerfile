@@ -53,12 +53,9 @@ WORKDIR /SwarmUI
 RUN    git config --global --add safe.directory '*' \
     && [ -d Models ] && mv Models _Models || true \
     && [ -d Data ] && mv Data _Data || true \
-    && [ -d .git/info ] && echo '/start.sh' >> .git/info/exclude
-
-RUN chmod a+x ./launchtools/comfy-install-linux.sh && ./launchtools/comfy-install-linux.sh nv
-
-    # && ln -s /workspace/Models Models \
-    # && ln -s /workspace/Data Data
+    && [ -d .git/info ] && echo '/start.sh' >> .git/info/exclude \
+    && ln -s /workspace/Models Models \
+    && ln -s /workspace/Data Data
 
 # Expose the port for other containers (to use Swarm as an API if you want
 EXPOSE 7801
