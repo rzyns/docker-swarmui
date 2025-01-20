@@ -24,9 +24,7 @@ if [ -d "/workspace" ] && [ ! -d "/workspace/dlbackend" ]; then
     cd /SwarmUI
 fi
 
-if [ -d "/workspace/Data" ]; then
-    cp Settings.fds /workspace/Data
-    cp Backends.fds /workspace/Data
-fi
+mkdir -p Data
+cp Settings.fds Backends.fds Data/
 
 exec ./launch-linux.sh --launch_mode none --host 0.0.0.0
