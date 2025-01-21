@@ -6,6 +6,9 @@ LABEL org.opencontainers.image.source=https://github.com/rzyns/docker-swarmui
 LABEL org.opencontainers.image.description="SwarmUI Stable Diffusion backend and GUI"
 LABEL maintainer="Janusz Dziurzyński <janusz@forserial.org>"
 
+COPY procfusion.toml /procfusion.toml
+RUN curl -fsSL https://github.com/linkdd/procfusion/releases/download/v0.2.2/procfusion-v0.2.2-x86_64-unknown-linux-gnu.tar.gz | tar -xz --wildcards '*/procfusion' --strip-components=1 -C /usr/local/bin
+
 RUN    apt-get update \
     && apt-get install -y --no-install-recommends \
         aria2 \
@@ -50,7 +53,7 @@ EOF
 
 WORKDIR /SwarmUI/dlbackend/ComfyUI
 
-RUN --mount=type=cache,target=/root/.pip/cache <<EOF
+RUN --mount=type=cache,target=/root/.cache/pip <<EOF
     python3 -s -m venv venv
     source venv/bin/activate
     python -s -m pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu124
@@ -80,4 +83,5 @@ EXPOSE 7801
 EXPOSE 6800
 
 # Set the run file to the launch script
-ENTRYPOINT ["bash", "./start.sh"]
+# ENTRYPOINT ["bash", "./start.sh"]
+ENTRYPOINT [ "/usr/local/bin/procfusion", "/procfusion.toml" ]
