@@ -7,7 +7,7 @@ LABEL org.opencontainers.image.description="SwarmUI Stable Diffusion backend and
 LABEL maintainer="Janusz Dziurzyński <janusz@forserial.org>"
 
 COPY procfusion.toml /procfusion.toml
-RUN curl -fsSL https://github.com/linkdd/procfusion/releases/download/v0.2.2/procfusion-v0.2.2-x86_64-unknown-linux-gnu.tar.gz | tar -xz --wildcards '*/procfusion' --strip-components=1 -C /usr/local/bin
+RUN curl -fsSL https://github.com/linkdd/procfusion/releases/download/v0.2.2/procfusion-v0.2.2-x86_64-unknown-linux-gnu.tar.gz | tar -xz -C /usr/local/bin --wildcards '*/procfusion' --strip-components=1
 
 RUN    apt-get update \
     && apt-get install -y --no-install-recommends \
