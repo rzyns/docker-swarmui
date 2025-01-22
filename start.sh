@@ -2,8 +2,8 @@
 set -eo pipefail
 
 if [ -d "/workspace" ] ; then
-    mkdir -p /workspace/Models/configs
-    cp dlbackend/ComfyUI/_models/configs/* /workspace/Models/configs/
+    mkdir -p /workspace/models/configs
+    cp dlbackend/ComfyUI/_models/configs/* /workspace/models/configs/
 fi
 
 mkdir -p Data

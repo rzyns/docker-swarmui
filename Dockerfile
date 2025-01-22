@@ -70,8 +70,8 @@ RUN <<EOF
     MODEL_DIRS="checkpoints clip clip_vision configs controlnet diffusers diffusion_models embeddings gligen hypernetworks loras photomaker style_models text_encoders unet upscale_models vae vae_approx"
 
     for dir in $MODEL_DIRS; do
-        mkdir -p "/workspace/Models/${dir}"
-        ln -s "/workspace/Models/${dir}" "dlbackend/ComfyUI/models/"
+        mkdir -p "/workspace/models/${dir}"
+        ln -s "/workspace/models/${dir}" "dlbackend/ComfyUI/models/"
     done
 EOF
 
