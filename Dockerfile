@@ -76,7 +76,33 @@ RUN <<EOF
 EOF
 
 COPY ./start.sh /SwarmUI/start.sh
-COPY ./Settings.fds ./Backends.fds ./start-aria2c.sh /SwarmUI/
+COPY ./Settings.fds ./Backends.fds ./start-aria2c.sh ./snapshot.yaml /SwarmUI/
+
+
+WORKDIR /SwarmUI/dlbackend/ComfyUI
+
+RUN --mount=type=cache,target=/tmp/git_cache <<EOF
+    git clone https://github.com/ltdrdata/ComfyUI-Manager /tmp/git_cache/ComfyUI-Manager
+
+    mkdir -p /SwarmUI/dlbackend/ComfyUI/custom_nodes
+    cp -r /tmp/git_cache/ComfyUI-Manager /SwarmUI/dlbackend/ComfyUI/custom_nodes/ComfyUI-Manager
+EOF
+
+RUN --mount=type=cache,target=/root/.cache/pip <<EOF
+    source venv/bin/activate
+    python3 -s -m pip install -r custom_nodes/ComfyUI-Manager/requirements.txt
+    python3 -s -m pip install --no-input comfy-cli
+    mkdir -p /root/.config/comfy-cli
+    echo "[DEFAULT]" > /root/.config/comfy-cli/config.ini
+    echo "enable_tracking = True" >> /root/.config/comfy-cli/config.ini
+EOF
+
+RUN --mount=type=cache,target=/root/.cache/pip <<EOF
+    source venv/bin/activate
+    comfy --here node restore-snapshot /SwarmUI/snapshot.yaml
+EOF
+
+WORKDIR /SwarmUI
 
 # Expose the port for other containers (to use Swarm as an API if you want
 EXPOSE 7801
