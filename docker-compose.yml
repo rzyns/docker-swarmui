@@ -46,7 +46,7 @@ services:
         # network_mode: host
         environment:
             ARIA2C_SECRET: "secret"
-            SWARM_ARGS: "--asp_loglevel=DEBUG --loglevel=DEBUG"
+            SWARM_ARGS: "--loglevel=DEBUG"
         volumes:
             # - ./swarmui-backend/Data:/SwarmUI/Data
             # - ./swarmui-backend/models/:/workspace/models
