@@ -111,4 +111,4 @@ EXPOSE 6800
 # Set the run file to the launch script
 # ENTRYPOINT ["bash", "./start.sh"]
 ENV SWARM_ARGS=""
-ENTRYPOINT [ "/usr/local/bin/procfusion", "/procfusion.toml" ]
+ENTRYPOINT [ "/usr/local/bin/procfusion", "/docker-swarmui/procfusion.toml" ]
