@@ -102,7 +102,7 @@ WORKDIR /SwarmUI
 # COPY procfusion.toml /procfusion.toml
 # COPY ./start.sh /start.sh
 # COPY ./Settings.fds ./Backends.fds ./start-aria2c.sh ./snapshot.yaml /
-COPY . /docker-swarmui/
+COPY ./docker-swarmui/ /docker-swarmui/
 
 # Expose the port for other containers (to use Swarm as an API if you want
 EXPOSE 7801

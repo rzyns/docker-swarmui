@@ -1,0 +1,281 @@
+owner:
+	MaxOutPathDepth: 5
+	ModelWhitelist:
+	ModelBlacklist:
+	PermissionFlags:
+	- *
+	- shutdown
+	- edit_wildcards
+	- comfy_backend_generate
+	- gridgen_read_grids
+	- reset_metadata
+	- read_user_settings
+	- toggle_backends
+	- add_remove_backends
+	- read_server_info_panels
+	- comfy_direct_calls
+	- param_backend_type
+	- fundamental_generate_tab_access
+	- comfy_dynamic_custom_workflows
+	- edit_user_settings
+	- extra_loras
+	- restart_backends
+	- pickle2safetensors
+	- user_delete_image
+	- edit_server_settings
+	- local_image_folder
+	- view_server_tab
+	- control_mem_clean
+	- gridgen_generate_grids
+	- use_tokenizer
+	- restart
+	- comfy_stored_custom_workflows
+	- view_image_history
+	- view_others_outputs
+	- edit_backends
+	- manage_extensions
+	- comfy_read_workflows
+	- user_star_images
+	- download_models
+	- fundamental_model_access
+	- server_debug_message
+	- delete_models
+	- admin_debug
+	- gridgen_save_grids
+	- manage_presets
+	- edit_params
+	- model_params
+	- edit_model_metadata
+	- param_controlnet
+	- param_backend_id
+	- create_tensorrt
+	- view_logs
+	- basic_image_generation
+	- param_video
+	- comfy_edit_workflows
+	- configure_roles
+	- manage_users
+	- load_models_now
+	- install
+	- read_server_settings
+	- view_backends_list
+	- install_features
+	- control_model_refresh
+	- imagebatcher_use_image_batcher
+	MaxT2ISimultaneous: 32
+	AllowUnsafeOutpaths: false
+	Name: Owner
+	Description: (Auto Generated Role, cannot delete). The owner of the server, local user when account system is disabled. Generally should have all permissions ever always.
+admin:
+	MaxOutPathDepth: 5
+	ModelWhitelist:
+	ModelBlacklist:
+	PermissionFlags:
+	- *
+	- edit_wildcards
+	- comfy_backend_generate
+	- gridgen_read_grids
+	- reset_metadata
+	- read_user_settings
+	- toggle_backends
+	- add_remove_backends
+	- read_server_info_panels
+	- comfy_direct_calls
+	- param_backend_type
+	- fundamental_generate_tab_access
+	- comfy_dynamic_custom_workflows
+	- edit_user_settings
+	- extra_loras
+	- restart_backends
+	- pickle2safetensors
+	- user_delete_image
+	- edit_server_settings
+	- view_server_tab
+	- control_mem_clean
+	- gridgen_generate_grids
+	- use_tokenizer
+	- restart
+	- comfy_stored_custom_workflows
+	- view_image_history
+	- view_others_outputs
+	- edit_backends
+	- manage_extensions
+	- comfy_read_workflows
+	- user_star_images
+	- download_models
+	- fundamental_model_access
+	- delete_models
+	- admin_debug
+	- gridgen_save_grids
+	- manage_presets
+	- edit_params
+	- model_params
+	- edit_model_metadata
+	- param_controlnet
+	- param_backend_id
+	- create_tensorrt
+	- view_logs
+	- basic_image_generation
+	- param_video
+	- comfy_edit_workflows
+	- load_models_now
+	- read_server_settings
+	- view_backends_list
+	- install_features
+	- control_model_refresh
+	- imagebatcher_use_image_batcher
+	MaxT2ISimultaneous: 32
+	AllowUnsafeOutpaths: false
+	Name: Admin
+	Description: (Auto Generated Role, cannot delete). An administrator of the server, has near-total control.
+poweruser:
+	MaxOutPathDepth: 5
+	ModelWhitelist:
+	ModelBlacklist:
+	PermissionFlags:
+	- *
+	- edit_wildcards
+	- comfy_backend_generate
+	- gridgen_read_grids
+	- reset_metadata
+	- read_user_settings
+	- comfy_direct_calls
+	- param_backend_type
+	- fundamental_generate_tab_access
+	- comfy_dynamic_custom_workflows
+	- edit_user_settings
+	- extra_loras
+	- restart_backends
+	- pickle2safetensors
+	- user_delete_image
+	- view_server_tab
+	- control_mem_clean
+	- gridgen_generate_grids
+	- use_tokenizer
+	- comfy_stored_custom_workflows
+	- view_image_history
+	- comfy_read_workflows
+	- user_star_images
+	- download_models
+	- fundamental_model_access
+	- delete_models
+	- gridgen_save_grids
+	- manage_presets
+	- edit_params
+	- model_params
+	- edit_model_metadata
+	- param_controlnet
+	- param_backend_id
+	- create_tensorrt
+	- basic_image_generation
+	- param_video
+	- comfy_edit_workflows
+	- load_models_now
+	- view_backends_list
+	- install_features
+	- control_model_refresh
+	MaxT2ISimultaneous: 32
+	AllowUnsafeOutpaths: false
+	Name: PowerUser
+	Description: (Auto Generated Role, cannot delete). A very advanced, and trusted, user. Has access to things that could be dangerous or can be maliciously abused.
+user:
+	MaxOutPathDepth: 5
+	ModelWhitelist:
+	ModelBlacklist:
+	PermissionFlags:
+	- *
+	- gridgen_read_grids
+	- read_user_settings
+	- fundamental_generate_tab_access
+	- edit_user_settings
+	- user_delete_image
+	- gridgen_generate_grids
+	- use_tokenizer
+	- view_image_history
+	- user_star_images
+	- fundamental_model_access
+	- gridgen_save_grids
+	- manage_presets
+	- edit_params
+	- model_params
+	- param_controlnet
+	- basic_image_generation
+	- param_video
+	MaxT2ISimultaneous: 32
+	AllowUnsafeOutpaths: false
+	Name: User
+	Description: (Auto Generated Role, cannot delete). A general user. The default role for valid accounts.
+guest:
+	MaxOutPathDepth: 5
+	ModelWhitelist:
+	ModelBlacklist:
+	PermissionFlags:
+	- *
+	- read_user_settings
+	- fundamental_generate_tab_access
+	- use_tokenizer
+	- fundamental_model_access
+	MaxT2ISimultaneous: 32
+	AllowUnsafeOutpaths: false
+	Name: Guest
+	Description: (Auto Generated Role, cannot delete). An unregistered or unverified guest account. Only when public unverified access is enabled.
+___$tracked:
+- shutdown
+- edit_wildcards
+- comfy_backend_generate
+- gridgen_read_grids
+- reset_metadata
+- read_user_settings
+- toggle_backends
+- add_remove_backends
+- read_server_info_panels
+- comfy_direct_calls
+- param_backend_type
+- fundamental_generate_tab_access
+- comfy_dynamic_custom_workflows
+- edit_user_settings
+- extra_loras
+- restart_backends
+- pickle2safetensors
+- user_delete_image
+- edit_server_settings
+- local_image_folder
+- view_server_tab
+- control_mem_clean
+- gridgen_generate_grids
+- use_tokenizer
+- restart
+- comfy_stored_custom_workflows
+- view_image_history
+- view_others_outputs
+- edit_backends
+- manage_extensions
+- comfy_read_workflows
+- user_star_images
+- download_models
+- fundamental_model_access
+- server_debug_message
+- delete_models
+- admin_debug
+- gridgen_save_grids
+- manage_presets
+- edit_params
+- model_params
+- edit_model_metadata
+- param_controlnet
+- param_backend_id
+- create_tensorrt
+- view_logs
+- basic_image_generation
+- param_video
+- comfy_edit_workflows
+- configure_roles
+- manage_users
+- *
+- load_models_now
+- install
+- read_server_settings
+- view_backends_list
+- install_features
+- control_model_refresh
+- imagebatcher_use_image_batcher

@@ -1,0 +1,131 @@
+Paths:
+	ModelRoot: /workspace/models
+	SDModelFolder: checkpoints
+	SDLoraFolder: loras
+	SDVAEFolder: vae
+	SDEmbeddingFolder: embeddings
+	SDControlNetsFolder: controlnet
+	SDClipFolder: clip
+	SDClipVisionFolder: clip_vision
+	DataPath: /workspace/Data
+	OutputPath: output
+	WildcardsFolder: Wildcards
+	AppendUserNameToOutputPath: true
+	RecycleDeletedImages: false
+	RecycleDeletedModels: false
+	ClearStrayModelData: false
+	EditMetadataAcrossAllDups: true
+	DownloaderAlwaysResave: true
+Metadata:
+	ModelMetadataPerFolder: false
+	ImageMetadataPerFolder: false
+	XLDefaultAsXL1: false
+	EditMetadataWriteJSON: false
+	ImageMetadataIncludeModelHash: true
+Network:
+	ExternalURL: \x
+	Host: 0.0.0.0
+	Port: 7801
+	PortCanChange: false
+	BackendStartingPort: 7820
+	CloudflaredPath: \x
+	AuthBypassIPs: 127.0.0.1,::1
+	RequiredAuthorization: \x
+	EnableSpecialDevForwarding: false
+Maintenance:
+	CheckForUpdates: true
+	AutoPullDevUpdates: true
+	RestartAfterHours: 0
+	RestartHoursAllowed: \x
+	RestartDayAllowed: \x
+DefaultUser:
+	OutPathBuilder:
+		Format: raw/[year]-[month]-[day]/[hour][minute]-[prompt]-[model]-[seed]
+		MaxLenPerPart: 40
+		ModelPathsSkipFolders: false
+	FileFormat:
+		ImageFormat: PNG
+		SaveMetadata: true
+		DPI: 0
+		SaveTextFileMetadata: true
+	SaveFiles: true
+	StarNoFolders: false
+	Roles:
+	- owner
+	Password: \x
+	Theme: eyesear_white
+	CenterImageAlwaysGrow: false
+	AutoSwapImagesIncludesFullView: false
+	ButtonsUnderMainImages: \x
+	ResetBatchSizeToOne: false
+	HintFormat: BUTTON
+	HoverDelaySeconds: 0.5
+	MaxPromptLines: 10
+	VAEs:
+		DefaultSDXLVAE: None
+		DefaultSDv1VAE: None
+		DefaultSVDVAE: None
+		DefaultFluxVAE: None
+		DefaultSD3VAE: None
+		DefaultMochiVAE: None
+	MaxImagesInMiniGrid: 1
+	MaxImagesInHistory: 1000
+	MaxImagesScannedInHistory: 10000
+	ImageHistoryUsePreviews: true
+	MaxSimulPreviews: 1
+	GenerateForeverDelay: 0.1
+	GenerateForeverQueueSize: 1
+	Language: en
+	ReuseParamExcludeList: wildcardseed
+	AutoComplete:
+		Source: \x
+		EscapeParens: true
+		Suffix: \x
+		MatchMode: Bucketed
+		SortMode: Active
+		SpacingMode: None
+Backends:
+	MaxBackendInitAttempts: 3
+	MaxTimeoutMinutes: 20
+	PerRequestTimeoutMinutes: 10080
+	MaxRequestsForcedOrder: 20
+	UnrestrictedMaxT2iSimultaneous: false
+	ClearVRAMAfterMinutes: 10
+	ClearSystemRAMAfterMinutes: 60
+	AlwaysRefreshOnLoad: true
+IsInstalled: true
+InstallDate: 2025-01-19
+InstallVersion: 0.9.4.1
+NvidiaQueryRateLimitMS: 1000
+LaunchMode: web
+AddDebugData: true
+ShowExperimentalFeatures: false
+Authorization:
+	AuthorizationRequired: false
+	AllowLocalhostBypass: true
+Logs:
+	LogLevel: Debug
+	SaveLogToFile: true
+	LogsPath: Logs/[year]-[month]/[day]-[hour]-[minute].log
+	RepeatTimestampAfterMinutes: 10
+UI:
+	OverrideWelcomeMessage: \x
+	AllowAnimatedPreviews: true
+WebHooks:
+	QueueStartWebhook: \x
+	QueueStartWebhookData: \x
+	QueueEndWebhook: \x
+	QueueEndWebhookData: \x
+	EveryGenWebhook: \x
+	EveryGenWebhookData: \x
+	ManualGenWebhook: \x
+	ManualGenWebhookData: \x
+	ServerStartWebhook: \x
+	ServerStartWebhookData: \x
+	ServerShutdownWebhook: \x
+	ServerShutdownWebhookData: \x
+	QueueEndDelay: 1
+Performance:
+	ImageDataValidationChance: 0.05
+	DoBackendDataCache: false
+	AllowGpuSpecificOptimizations: true

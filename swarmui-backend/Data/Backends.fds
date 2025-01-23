@@ -1,0 +1,14 @@
+0:
+        type: comfyui_selfstart
+        title: \x
+        enabled: true
+        settings:
+                StartScript: /SwarmUI/dlbackend/ComfyUI/main.py
+                ExtraArgs: \x
+                DisableInternalArgs: false
+                AutoUpdate: true
+                FrontendVersion: LatestSwarmValidated
+                EnablePreviews: true
+                GPU_ID: 0
+                OverQueue: 1
+                AutoRestart: true

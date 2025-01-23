@@ -1,0 +1,11 @@
+0:
+	type: swarmswarmbackend
+	title: Swarm-API-Backend
+	enabled: true
+	settings:
+		Address: http://swarmui-backend:7801
+		AllowIdle: false
+		AllowForwarding: true
+		AllowWebsocket: true
+		AuthorizationHeader: \x
+		OtherHeaders: \x
