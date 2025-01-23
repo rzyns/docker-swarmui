@@ -1,9 +1,9 @@
 [processes.swarmui]
-command = "/SwarmUI/start.sh"
+command = "/docker-swarmui/start.sh"
 shell = "/bin/bash"
 directory = "/SwarmUI"
 
 [processes.aria2]
-command = "/SwarmUI/start-aria2c.sh"
+command = "/docker-swarmui/start-aria2c.sh"
 shell = "/bin/bash"
 directory = "/SwarmUI"

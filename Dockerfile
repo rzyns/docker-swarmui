@@ -7,7 +7,6 @@ LABEL org.opencontainers.image.source=https://github.com/rzyns/docker-swarmui
 LABEL org.opencontainers.image.description="SwarmUI Stable Diffusion backend and GUI"
 LABEL maintainer="Janusz Dziurzyński <janusz@forserial.org>"
 
-COPY procfusion.toml /procfusion.toml
 RUN curl -fsSL https://github.com/linkdd/procfusion/releases/download/v0.2.2/procfusion-v0.2.2-x86_64-unknown-linux-gnu.tar.gz | tar -xz -C /usr/local/bin --wildcards '*/procfusion' --strip-components=1
 
 RUN    apt-get update \
@@ -75,10 +74,6 @@ RUN <<EOF
     done
 EOF
 
-COPY ./start.sh /SwarmUI/start.sh
-COPY ./Settings.fds ./Backends.fds ./start-aria2c.sh ./snapshot.yaml /SwarmUI/
-
-
 WORKDIR /SwarmUI/dlbackend/ComfyUI
 
 RUN --mount=type=cache,target=/tmp/git_cache <<EOF
@@ -103,6 +98,11 @@ RUN --mount=type=cache,target=/root/.cache/pip <<EOF
 EOF
 
 WORKDIR /SwarmUI
+
+# COPY procfusion.toml /procfusion.toml
+# COPY ./start.sh /start.sh
+# COPY ./Settings.fds ./Backends.fds ./start-aria2c.sh ./snapshot.yaml /
+COPY . /docker-swarmui/
 
 # Expose the port for other containers (to use Swarm as an API if you want
 EXPOSE 7801
