@@ -9,4 +9,4 @@ fi
 mkdir -p Data
 cp Settings.fds Backends.fds Data/
 
-exec ./launch-linux.sh --launch_mode none --host 0.0.0.0
+exec ./launch-linux.sh --launch_mode none --host 0.0.0.0 $SWARM_ARGS

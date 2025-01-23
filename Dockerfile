@@ -1,3 +1,4 @@
+# ghcr.io/rzyns/docker-swarmui:development
 FROM mcr.microsoft.com/dotnet/sdk:8.0-bookworm-slim
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -65,13 +66,12 @@ WORKDIR /SwarmUI
 
 RUN <<EOF
     mv dlbackend/ComfyUI/models dlbackend/ComfyUI/_models
-    mkdir dlbackend/ComfyUI/models
+    ln -s /workspace/models dlbackend/ComfyUI/models
 
-    MODEL_DIRS="checkpoints clip clip_vision configs controlnet diffusers diffusion_models embeddings gligen hypernetworks loras photomaker style_models text_encoders unet upscale_models vae vae_approx"
+    MODEL_DIRS="$(cat /SwarmUI/model-dirs.txt)"
 
     for dir in $MODEL_DIRS; do
         mkdir -p "/workspace/models/${dir}"
-        ln -s "/workspace/models/${dir}" "dlbackend/ComfyUI/models/"
     done
 EOF
 
@@ -110,4 +110,5 @@ EXPOSE 6800
 
 # Set the run file to the launch script
 # ENTRYPOINT ["bash", "./start.sh"]
+ENV SWARM_ARGS=""
 ENTRYPOINT [ "/usr/local/bin/procfusion", "/procfusion.toml" ]
