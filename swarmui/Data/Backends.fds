@@ -3,9 +3,27 @@
 	title: Swarm-API-Backend
 	enabled: true
 	settings:
+		#The network address of the other Swarm instance.
+		#Usually starts with 'http://' and ends with ':7801'.
 		Address: http://swarmui-backend:7801
+		#Whether the backend is allowed to revert to an 'idle' state if the API address is unresponsive.
+		#An idle state is not considered an error, but cannot generate.
+		#It will automatically return to 'running' if the API becomes available.
 		AllowIdle: false
+		#Whether remote Swarm backends should be followed through.
+		#If false, only backends directly local to the remote machine are used.
+		#If true, the remote backend can chain further connected backends.
 		AllowForwarding: true
+		#Whether the backend is allowed to use WebSocket connections.
+		#If true, the backend will work normally and provide previews and updates and all.
+		#If false, the backend will freeze while generating until the generation completes.
+		#False may be needed for some limited network environments.
 		AllowWebsocket: true
+		#If the remote instance has an 'Authorization:' header required, specify it here.
+		#For example, 'Bearer abc123'.
+		#If you don't know what this is, you don't need it.
 		AuthorizationHeader: \x
+		#Any other headers here, newline separated, for example:
+		#MyHeader: MyVal
+		#SecondHeader: secondVal
 		OtherHeaders: \x
